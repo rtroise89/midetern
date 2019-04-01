@@ -1,9 +1,9 @@
 ---
-title             : "The title"
+title             : "Reproduction of:Unlearning implicit social biases during sleep (2015)"
 shorttitle        : "Title"
 
 author: 
-  - name          : "First Author"
+  - name          : "Richard Troise"
     affiliation   : "1"
     corresponding : yes    # Define only one corresponding author
     address       : "Postal address"

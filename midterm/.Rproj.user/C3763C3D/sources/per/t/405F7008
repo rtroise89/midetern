@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1554091088113.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3308111576",
+    "id" : "405F7008",
+    "lastKnownWriteTime" : 1554094523,
+    "last_content_update" : -2147483648,
+    "path" : "~/GitHub(assignments)/midterm/midterm/data script.R",
+    "project_path" : "data script.R",
+    "properties" : {
+        "cursorPosition" : "21,16",
+        "scrollLine" : "2",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
