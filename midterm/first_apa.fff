@@ -1,0 +1,7 @@
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{first_apa_files/figure-latex/fig1-1.pdf}
+\caption{\label{fig:fig1}figure shows a histogram}
+\end{figure*}

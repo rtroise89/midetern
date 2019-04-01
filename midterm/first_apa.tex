@@ -1,4 +1,4 @@
-\documentclass[man]{apa6}
+\documentclass[man,floatsintext]{apa6}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -24,8 +24,8 @@
 \usepackage{hyperref}
 \hypersetup{unicode=true,
             pdftitle={Reproduction of:Unlearning implicit social biases during sleep (2015)},
-            pdfauthor={Richard Troise~\& Ernst-August Doelle},
-            pdfkeywords={keywords},
+            pdfauthor={Richard Troise},
+            pdfkeywords={keywords, more, another},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -64,15 +64,14 @@
 
 
   \title{Reproduction of:Unlearning implicit social biases during sleep (2015)}
-    \author{Richard Troise\textsuperscript{1}~\& Ernst-August
-Doelle\textsuperscript{1,2}}
+    \author{Richard Troise\textsuperscript{1}}
     \date{}
   
 \shorttitle{Title}
 \affiliation{
 \vspace{0.5cm}
-\textsuperscript{1} Wilhelm-Wundt-University\\\textsuperscript{2} Konstanz Business School}
-\keywords{keywords\newline\indent Word count: X}
+\textsuperscript{1} Wilhelm-Wundt-University}
+\keywords{keywords, more, another\newline\indent Word count: X}
 \usepackage{csquotes}
 \usepackage{upgreek}
 \captionsetup{font=singlespacing,justification=justified}
@@ -93,15 +92,6 @@ Doelle\textsuperscript{1,2}}
 \newcommand{\getlongtablewidth}{\begingroup \ifcsname LT@\roman{LT@tables}\endcsname \global\longtablewidth=0pt \renewcommand{\LT@entry}[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}\@nameuse{LT@\roman{LT@tables}} \fi \endgroup}
 
 
-\DeclareDelayedFloatFlavor{ThreePartTable}{table}
-\DeclareDelayedFloatFlavor{lltable}{table}
-\DeclareDelayedFloatFlavor*{longtable}{table}
-\makeatletter
-\renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
-\makeatother
-\usepackage{lineno}
-
-\linenumbers
 
 \authornote{Add complete departmental affiliations for each
 author here. Each new line herein must be indented, like this line.
@@ -116,30 +106,17 @@ Troise, Postal address. E-mail:
 One or two sentences providing a \textbf{basic introduction} to the
 field, comprehensible to a scientist in any discipline.
 
-Two to three sentences of \textbf{more detailed background},
-comprehensible to scientists in related disciplines.
-
-One sentence clearly stating the \textbf{general problem} being
-addressed by this particular study.
-
-One sentence summarizing the main result (with the words ``\textbf{here
-we show}'' or their equivalent).
-
-Two or three sentences explaining what the \textbf{main result} reveals
-in direct comparison to what was thought to be the case previously, or
-how the main result adds to previous knowledge.
-
-One or two sentences to put the results into a more \textbf{general
-context}.
-
-Two or three sentences to provide a \textbf{broader perspective},
-readily comprehensible to a scientist in any discipline.
-
 
 }
 
 \begin{document}
 \maketitle
+
+sample citation
+
+\subsection{header}\label{header}
+
+great essay
 
 \section{Methods}\label{methods}
 
@@ -154,11 +131,13 @@ any), all manipulations, and all measures in the study.
 
 \subsection{Data analysis}\label{data-analysis}
 
-We used R (Version 3.5.0; R Core Team, 2018) and the R-package
+We used R (Version 3.5.2; R Core Team, 2018) and the R-package
 \emph{papaja} (Version 0.1.0.9842; Aust \& Barth, 2018) for all our
 analyses.
 
 \section{Results}\label{results}
+
+From figure 1. \includegraphics{first_apa_files/figure-latex/fig1-1.pdf}
 
 \section{Discussion}\label{discussion}
 
