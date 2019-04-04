@@ -5,13 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "442063480",
+    "hash" : "2530809232",
     "id" : "5B96EC07",
-    "lastKnownWriteTime" : 1554339546,
-    "last_content_update" : 1554339546,
+    "lastKnownWriteTime" : 1554390399,
+    "last_content_update" : -2147483648,
     "path" : "~/GitHub(assignments)/midterm/midterm/mybib.bib",
     "project_path" : "mybib.bib",
     "properties" : {
+        "cursorPosition" : "11,18",
+        "scrollLine" : "0"
     },
     "relative_order" : 6,
     "source_on_save" : false,

@@ -21,7 +21,16 @@ subject_dv =  c(cue_delay[1:length(cue_delay)], cue_prenap[1:length(cue_prenap)]
 
 # 2-way within subjects anova 
 all_data = data.frame(sub, subject_dv, cue_factor, time_factor)
-aov_out = aov(subject_dv~cue_factor*time_factor, all_data)
+library(dplyr)
+nas <- all_data %>%
+  filter(is.na(subject_dv)==TRUE)
+nas$sub<-as.factor(as.numeric(nas$sub))
+bad_subjects <- levels(nas$sub)
+
+clean_df <- all_data %>%
+              filter(sub %in% bad_subjects == FALSE)
+
+aov_out = aov(subject_dv~cue_factor*time_factor+Error(sub/(cue_factor*time_factor)), clean_df)
 summary(aov_out)
 
 # Graph of the means
