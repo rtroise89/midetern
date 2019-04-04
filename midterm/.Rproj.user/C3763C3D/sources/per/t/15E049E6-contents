@@ -22,3 +22,8 @@ for(i in 1:40){
 all_data = data.frame(sub, subject_dv, cue_factor, time_factor)
 aov_out = aov(subject_dv~cue_factor*time_factor, all_data)
 summary(aov_out)
+
+DV_analysis <- all_data %>%
+  group_by(sub) %>%
+  summarise(mean_score = mean(subject_dv, na.rm = TRUE))
+knitr::kable(DV_analysis)
