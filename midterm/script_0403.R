@@ -37,11 +37,28 @@ library(sjstats)
 eta_sq(aov_out, partial = TRUE)
 
 # Graph of the means, and paired t-test
-means = c(mean(cue_prenap), mean(cue_delay, na.rm = TRUE), mean(uncue_prenap), mean(uncue_delay, na.rm = TRUE))
-mean_matrix = matrix(means,2,2)
-barplot(mean_matrix, beside= TRUE, ylim= c(0,0.8))
 print(model.tables(aov_out,"means"), format="markdown")
+means = c(mean(cue_prenap), mean(cue_delay, na.rm = TRUE), mean(uncue_prenap), mean(uncue_delay, na.rm = TRUE))
+SEM = c(sd(cue_prenap)/38, sd(cue_delay, na.rm=TRUE)/38, sd(uncue_prenap)/38, sd(uncue_delay, na.rm=TRUE)/38)
 t.test(uncue_prenap, uncue_delay, paired=TRUE)
+group_means = data.frame(all_means=means, cue_f=c("Cue","Cue","Uncue","Uncue"), 
+                         time_f=c("Prenap","Delay","Prenap","Delay"), SEM)
+
+library(ggplot2)
+ggplot(group_means, aes(x=cue_f,
+                          y=all_means, 
+                          group=time_f,
+                          fill=time_f))+
+  geom_bar(stat="identity",position="dodge")+
+  theme_classic(base_size=12)+
+  xlab("Cue factor") +
+  ylab("Mean IAT scores")+
+  geom_errorbar(aes(ymin=all_means-SEM,
+                    ymax=all_means+SEM),
+                position=position_dodge(width=0.9),
+                width=.2,
+                color="black")+
+  coord_cartesian(ylim=c(0,1))
 
 # Power Analysis
 
@@ -66,7 +83,6 @@ which(plot_df$effect_sizes >= .112)
 
 
 # plot the power curve
-library(ggplot2)
 ggplot(plot_df, aes(x=effect_sizes,
                     y=power))+
   geom_point()+
