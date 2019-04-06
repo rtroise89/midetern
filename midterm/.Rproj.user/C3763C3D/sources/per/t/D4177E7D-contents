@@ -79,6 +79,30 @@ We used `r cite_r("r-references.bib")` for all our analyses.
 
 # Results
 
+```{r}
+#downloads csv data into R
+aaa3841_OpenData_withNA <- read.csv("~/GitHub(assignments)/midterm/midterm/aaa3841_OpenData_withNA.csv")
+
+#selecting data for analysis
+cue_prenap = aaa3841_OpenData_withNA$Cued_Prenap
+cue_delay = aaa3841_OpenData_withNA$Cued_Delayed
+uncue_prenap = aaa3841_OpenData_withNA$Uncued_Prenap
+uncue_delay = aaa3841_OpenData_withNA$Uncued_Delayed
+
+#preparing new data table of the two factors with IAT scores for each subject
+cue_factor = rep(c("C","U"), each = 80)
+time_factor = rep(rep(c("D","P"), each = 40), 2)
+subjects = aaa3841_OpenData_withNA$Ppt.
+sub = as.factor(subjects)
+subject_dv = c()
+
+
+subject_dv =  c(cue_delay[1:length(cue_delay)], cue_prenap[1:length(cue_prenap)], 
+                uncue_delay[1:length(uncue_delay)], uncue_prenap[1:length(uncue_prenap)])
+  
+```
+
+
 From figure 1.
 ```{r fig1, fig.cap="figure shows a histogram", fig.width=2, fig.height=3}
 a <- rnorm(100,0,1)

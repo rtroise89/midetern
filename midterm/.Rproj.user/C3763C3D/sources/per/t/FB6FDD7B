@@ -5,19 +5,19 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "4150858390",
+    "hash" : "813589946",
     "id" : "FB6FDD7B",
-    "lastKnownWriteTime" : 1554418679,
+    "lastKnownWriteTime" : 1554524204,
     "last_content_update" : -2147483648,
     "path" : "~/GitHub(assignments)/midterm/midterm/script_0403.R",
     "project_path" : "script_0403.R",
     "properties" : {
-        "cursorPosition" : "40,0",
-        "scrollLine" : "20",
+        "cursorPosition" : "72,13",
+        "scrollLine" : "53",
         "tempName" : "Untitled1"
     },
     "relative_order" : 7,
-    "source_on_save" : true,
+    "source_on_save" : false,
     "source_window" : "",
     "type" : "r_source"
 }

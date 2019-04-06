@@ -19,7 +19,7 @@ subject_dv =  c(cue_delay[1:length(cue_delay)], cue_prenap[1:length(cue_prenap)]
                 uncue_delay[1:length(uncue_delay)], uncue_prenap[1:length(uncue_prenap)])
   
 
-# 2-way within subjects anova 
+# 2-way between subjects anova 
 all_data = data.frame(sub, subject_dv, cue_factor, time_factor)
 library(dplyr)
 nas <- all_data %>%
@@ -33,8 +33,41 @@ clean_df <- all_data %>%
 aov_out = aov(subject_dv~cue_factor*time_factor+Error(sub/(cue_factor*time_factor)), clean_df)
 summary(aov_out)
 
-# Graph of the means
+library(sjstats)
+eta_sq(aov_out, partial = TRUE)
+
+# Graph of the means, and paired t-test
 means = c(mean(cue_prenap), mean(cue_delay, na.rm = TRUE), mean(uncue_prenap), mean(uncue_delay, na.rm = TRUE))
 mean_matrix = matrix(means,2,2)
 barplot(mean_matrix, beside= TRUE, ylim= c(0,0.8))
-eta_sq(aov_out)
+print(model.tables(aov_out,"means"), format="markdown")
+t.test(uncue_prenap, uncue_delay, paired=TRUE)
+
+# Power Analysis
+
+# function to run a simulated t-test
+sim_power <- function(x){
+  A <- rnorm(n=38,mean=0, sd=0.402)
+  B <- rnorm(n=38,mean=(0+x), sd=0.451)
+  return(t.test(A,B,var.equal=TRUE, paired = TRUE)$p.value)
+}
+
+# vector of effect sizes
+effect_sizes <- seq(.1,2,.1)
+# run simulation for each effect size 1000 times
+power <- sapply(effect_sizes, 
+                FUN = function(x) {
+                  sims <- replicate(1000,sim_power(x))
+                  sim_power <- length(sims[sims<.05])/length(sims)
+                  return(sim_power)})
+# combine into dataframe
+plot_df <- data.frame(effect_sizes,power)
+which(plot_df$effect_sizes >= .112)
+
+
+# plot the power curve
+library(ggplot2)
+ggplot(plot_df, aes(x=effect_sizes,
+                    y=power))+
+  geom_point()+
+  geom_line()
