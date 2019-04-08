@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "1611227326",
+    "hash" : "1879358473",
     "id" : "12B7B752",
-    "lastKnownWriteTime" : 1554156790,
-    "last_content_update" : 1554156790407,
+    "lastKnownWriteTime" : 1554760090,
+    "last_content_update" : 1554760090454,
     "path" : "~/GitHub/midterm/midterm/first_apa.Rmd",
     "project_path" : "first_apa.Rmd",
     "properties" : {
-        "cursorPosition" : "56,23",
-        "scrollLine" : "40"
+        "cursorPosition" : "76,52",
+        "scrollLine" : "61"
     },
     "relative_order" : 1,
     "source_on_save" : false,
