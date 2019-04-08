@@ -1,6 +1,6 @@
 ---
-title             : "Reproduction of:Unlearning implicit social biases during sleep (2015)"
-shorttitle        : "Title"
+title             : "Reproduing analysis of: Unlearning implicit social biases during sleep (2015)"
+shorttitle        : "Unlearning implicit social biases during sleep"
 
 author: 
   - name          : "Richard Troise"
@@ -12,7 +12,7 @@ author:
 
 affiliation:
   - id            : "1"
-    institution   : "Wilhelm-Wundt-University"
+    institution   : "Brooklyn College"
 
 
 authornote: |
@@ -21,12 +21,12 @@ authornote: |
   Enter author note here.
 
 abstract: |
-  One or two sentences providing a **basic introduction** to the field,  comprehensible to a scientist in any discipline.
+  There is evidence by @Hu1013 on the unlearning of social bias by reinforcing a counterbias behavior during slow-wave/REM sleep - the optimal time frame to consolidate new memories. The reproduced analysis pertains to the interaction of cued and uncued reduction bias before sleep (prenap), then, one week later (delayed). A power analysis shows that the original effect size may only be observed approximately half the time on average.
   
   
   <!-- https://tinyurl.com/ybremelq -->
   
-keywords          : "keywords, more, another"
+keywords          : "social biases, slow-wave sleep"
 wordcount         : "X"
 
 bibliography      : ["r-references.bib", "mybib.bib"]
@@ -53,25 +53,22 @@ library("papaja")
 set.seed(42)
 knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 ```
+  
+  The experiment on unlearning social bias shows the relevance of sleep playing a role in the dissaption of the pre-existing implicit bias, @Hu1013. The rationale comes from auditory information reinforcing learning behavior during slow wave sleep, causing a targeted memory reactivation. As a result of the auditory cue, counterbias behavior in participants was expected to increase. In addition, the memory reactivation should result in a sustained reduction in social bias, in that the measured bias does not differ between prenap and delay. The implications of such an effect may be relevant for unlearning other unwanted habits. The original data was downloaded from [https://osf.io/b3k9a/](https://osf.io/b7x8q/)
 
-sample citation @Hu1013
 
 second citation @Keith1989
 
-
-
-## header
-
-great essay
-
 # Methods
-We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
 
 ## Participants
+  As stated in experiment, there were 40 participants recruited but only 38 were present for all groups.
 
 ## Material
+  The details of the experiment can be found in @Hu1013.
 
 ## Procedure
+  The 38 participants experienced four conditions:
 
 ## Data analysis
 We used `r cite_r("r-references.bib")` for all our analyses.
@@ -79,7 +76,7 @@ We used `r cite_r("r-references.bib")` for all our analyses.
 
 # Results
 
-```{r}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 #downloads csv data into R
 aaa3841_OpenData_withNA <- read.csv("~/GitHub(assignments)/midterm/midterm/aaa3841_OpenData_withNA.csv")
 
@@ -99,7 +96,27 @@ subject_dv = c()
 
 subject_dv =  c(cue_delay[1:length(cue_delay)], cue_prenap[1:length(cue_prenap)], 
                 uncue_delay[1:length(uncue_delay)], uncue_prenap[1:length(uncue_prenap)])
-  
+
+# 2-way between subjects anova 
+all_data = data.frame(sub, subject_dv, cue_factor, time_factor)
+library(dplyr)
+nas <- all_data %>%
+  filter(is.na(subject_dv)==TRUE)
+nas$sub<-as.factor(as.numeric(nas$sub))
+bad_subjects <- levels(nas$sub)
+
+clean_df <- all_data %>%
+              filter(sub %in% bad_subjects == FALSE)
+
+aov_out = aov(subject_dv~cue_factor*time_factor+Error(sub/(cue_factor*time_factor)), clean_df)
+
+
+```
+
+Figure 2: Results of 2x2 repeated measured ANOVA
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+  library(xtable)
+  knitr::kable(xtable(summary(aov_out)))
 ```
 
 

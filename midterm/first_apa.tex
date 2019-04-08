@@ -23,9 +23,9 @@
 }{}
 \usepackage{hyperref}
 \hypersetup{unicode=true,
-            pdftitle={Reproduction of:Unlearning implicit social biases during sleep (2015)},
+            pdftitle={Reproduing analysis of: Unlearning implicit social biases during sleep (2015)},
             pdfauthor={Richard Troise},
-            pdfkeywords={keywords, more, another},
+            pdfkeywords={social biases, slow-wave sleep},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -63,15 +63,16 @@
 \def\footnote{\protect\rmarkdownfootnote}
 
 
-  \title{Reproduction of:Unlearning implicit social biases during sleep (2015)}
+  \title{Reproduing analysis of: Unlearning implicit social biases during sleep
+(2015)}
     \author{Richard Troise\textsuperscript{1}}
     \date{}
   
-\shorttitle{Title}
+\shorttitle{Unlearning implicit social biases during sleep}
 \affiliation{
 \vspace{0.5cm}
-\textsuperscript{1} Wilhelm-Wundt-University}
-\keywords{keywords, more, another\newline\indent Word count: X}
+\textsuperscript{1} Brooklyn College}
+\keywords{social biases, slow-wave sleep\newline\indent Word count: X}
 \usepackage{csquotes}
 \usepackage{upgreek}
 \captionsetup{font=singlespacing,justification=justified}
@@ -103,8 +104,13 @@ Troise, Postal address. E-mail:
 \href{mailto:my@email.com}{\nolinkurl{my@email.com}}}
 
 \abstract{
-One or two sentences providing a \textbf{basic introduction} to the
-field, comprehensible to a scientist in any discipline.
+There is evidence by Hu et al. (2015) on the unlearning of social bias
+by reinforcing a counterbias behavior during slow-wave/REM sleep - the
+optimal time frame to consolidate new memories. The reproduced analysis
+pertains to the interaction of cued and uncued reduction bias before
+sleep (prenap), then, one week later (delayed). A power analysis shows
+that the original effect size may only be observed approximately half
+the time on average.
 
 
 }
@@ -112,32 +118,66 @@ field, comprehensible to a scientist in any discipline.
 \begin{document}
 \maketitle
 
-sample citation Hu et al. (2015)
+The experiment on unlearning social bias shows the relevance of sleep
+playing a role in the dissaption of the pre-existing implicit bias, Hu
+et al. (2015). The rationale comes from auditory information reinforcing
+learning behavior during slow wave sleep, causing a targeted memory
+reactivation. As a result of the auditory cue, counterbias behavior in
+participants was expected to increase. In addition, the memory
+reactivation should result in a sustained reduction in social bias, in
+that the measured bias does not differ between prenap and delay. The
+implications of such an effect may be relevant for unlearning other
+unwanted habits. The original data was downloaded from
+\href{https://osf.io/b7x8q/}{https://osf.io/b3k9a/}
 
 second citation Muller and Barton (1989)
 
-\subsection{header}\label{header}
-
-great essay
-
 \section{Methods}\label{methods}
-
-We report how we determined our sample size, all data exclusions (if
-any), all manipulations, and all measures in the study.
 
 \subsection{Participants}\label{participants}
 
+As stated in experiment, there were 40 participants recruited but only
+38 were present for all groups.
+
 \subsection{Material}\label{material}
+
+The details of the experiment can be found in Hu et al. (2015).
 
 \subsection{Procedure}\label{procedure}
 
+The 38 participants experienced four conditions:
+
 \subsection{Data analysis}\label{data-analysis}
 
-We used R (Version 3.5.0; R Core Team, 2018) and the R-package
-\emph{papaja} (Version 0.1.0.9842; Aust \& Barth, 2018) for all our
-analyses.
+We used R (Version 3.5.0; R Core Team, 2018) and the R-packages
+\emph{dplyr} (Version 0.8.0.1; Wickham, François, Henry, \& Müller,
+2019), \emph{papaja} (Version 0.1.0.9842; Aust \& Barth, 2018), and
+\emph{xtable} (Version 1.8.3; Dahl, Scott, Roosen, Magnusson, \&
+Swinton, 2018) for all our analyses.
 
 \section{Results}\label{results}
+
+Figure 2: Results of 2x2 repeated measured ANOVA
+
+\begin{tabular}{l|r|r|r|r|r}
+\hline
+  & Df & Sum Sq & Mean Sq & F value & Pr(>F)\\
+\hline
+Residuals & 37 & 9.4853844 & 0.2563617 & NA & NA\\
+\hline
+cue\_factor & 1 & 0.0929324 & 0.0929324 & 0.3355098 & 0.5659427\\
+\hline
+Residuals & 37 & 10.2485769 & 0.2769886 & NA & NA\\
+\hline
+time\_factor & 1 & 0.8440958 & 0.8440958 & 5.7634410 & 0.0215060\\
+\hline
+Residuals & 37 & 5.4189059 & 0.1464569 & NA & NA\\
+\hline
+cue\_factor:time\_factor & 1 & 0.3290260 & 0.3290260 & 4.6718467 & 0.0372022\\
+\hline
+Residuals & 37 & 2.6058138 & 0.0704274 & NA & NA\\
+\hline
+\end{tabular}
 
 From figure 1. \includegraphics{first_apa_files/figure-latex/fig1-1.pdf}
 
@@ -155,6 +195,11 @@ From figure 1. \includegraphics{first_apa_files/figure-latex/fig1-1.pdf}
 Aust, F., \& Barth, M. (2018). \emph{papaja: Create APA manuscripts with
 R Markdown}. Retrieved from \url{https://github.com/crsh/papaja}
 
+\hypertarget{ref-R-xtable}{}
+Dahl, D. B., Scott, D., Roosen, C., Magnusson, A., \& Swinton, J.
+(2018). \emph{Xtable: Export tables to latex or html}. Retrieved from
+\url{https://CRAN.R-project.org/package=xtable}
+
 \hypertarget{ref-Hu1013}{}
 Hu, X., Antony, J. W., Creery, J. D., Vargas, I. M., Bodenhausen, G. V.,
 \& Paller, K. A. (2015). Unlearning implicit social biases during sleep,
@@ -171,6 +216,11 @@ doi:\href{https://doi.org/10.1080/01621459.1989.10478802}{10.1080/01621459.1989.
 R Core Team. (2018). \emph{R: A language and environment for statistical
 computing}. Vienna, Austria: R Foundation for Statistical Computing.
 Retrieved from \url{https://www.R-project.org/}
+
+\hypertarget{ref-R-dplyr}{}
+Wickham, H., François, R., Henry, L., \& Müller, K. (2019). \emph{Dplyr:
+A grammar of data manipulation}. Retrieved from
+\url{https://CRAN.R-project.org/package=dplyr}
 
 \endgroup
 
