@@ -25,7 +25,7 @@
 \hypersetup{unicode=true,
             pdftitle={Reproduing analysis of: Unlearning implicit social biases during sleep (2015)},
             pdfauthor={Richard Troise},
-            pdfkeywords={social biases, slow-wave sleep},
+            pdfkeywords={unlearning, social biases, slow-wave sleep},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -72,7 +72,7 @@
 \affiliation{
 \vspace{0.5cm}
 \textsuperscript{1} Brooklyn College}
-\keywords{social biases, slow-wave sleep\newline\indent Word count: X}
+\keywords{unlearning, social biases, slow-wave sleep\newline\indent Word count: X}
 \usepackage{csquotes}
 \usepackage{upgreek}
 \captionsetup{font=singlespacing,justification=justified}
@@ -119,8 +119,8 @@ the time on average.
 \maketitle
 
 The experiment on unlearning social bias shows the relevance of sleep
-playing a role in the dissaption of the pre-existing implicit bias, Hu
-et al. (2015). The rationale comes from auditory information reinforcing
+playing a role in the dissaption of a pre-existing implicit bias, Hu et
+al. (2015). The rationale comes from auditory information reinforcing
 learning behavior during slow wave sleep, causing a targeted memory
 reactivation. As a result of the auditory cue, counterbias behavior in
 participants was expected to increase. In addition, the memory
@@ -129,8 +129,6 @@ that the measured bias does not differ between prenap and delay. The
 implications of such an effect may be relevant for unlearning other
 unwanted habits. The original data was downloaded from
 \href{https://osf.io/b7x8q/}{https://osf.io/b3k9a/}
-
-second citation Muller and Barton (1989)
 
 \section{Methods}\label{methods}
 
@@ -145,17 +143,50 @@ The details of the experiment can be found in Hu et al. (2015).
 
 \subsection{Procedure}\label{procedure}
 
-The 38 participants experienced four conditions:
+In the reproduced analysis, the 38 participants' bias score were
+measured under four conditions: No auditory cue before sleep, then one
+week later; and a reinforced cue before sleep, then one week later.
 
 \subsection{Data analysis}\label{data-analysis}
 
 We used R (Version 3.5.0; R Core Team, 2018) and the R-packages
 \emph{dplyr} (Version 0.8.0.1; Wickham, François, Henry, \& Müller,
-2019), \emph{papaja} (Version 0.1.0.9842; Aust \& Barth, 2018), and
-\emph{xtable} (Version 1.8.3; Dahl, Scott, Roosen, Magnusson, \&
-Swinton, 2018) for all our analyses.
+2019), \emph{ggplot2} (Version 3.1.0; Wickham, 2016), \emph{papaja}
+(Version 0.1.0.9842; Aust \& Barth, 2018), and \emph{xtable} (Version
+1.8.3; Dahl, Scott, Roosen, Magnusson, \& Swinton, 2018) for all our
+analyses. Two participants had to be excluded from the analyses and were
+labelled as \enquote{NA} in the data sheet.
 
 \section{Results}\label{results}
+
+The relevant IAT bias scores were grouped in R-studio for each
+participant in order to perform a 2x2 (cue/uncue vs prenap/delay)
+repeated measure ANOVA. The group means are displayed in Figure 1
+followed by the ANOVA results in Figure 2. There was a main effect of
+Congruency, F (1, 49) = 342.45, MSE = 1684.39, p \textless{} 0.001. Mean
+reaction times were slower for incongruent (922 ms) than congruent
+groups (815 ms). There main effect of Posture was significant, F (1, 49)
+= 7.33, MSE = 4407.09, p =.009. Mean reaction times were slower for
+sitting (881 ms) than standing groups (855 ms). The two-way interaction
+between Congruency and Posture was significant, F (1, 49) = 8.96, MSE =
+731.82, p \textless{} 0.004. The Stroop effect was 23 ms smaller in the
+standing than sitting conditions.
+
+Figure 1: Means
+
+\begin{tabular}{r|l|l|r}
+\hline
+GroupMean & Cue & Time & SEM\\
+\hline
+0.4034053 & Cue & Prenap & 0.0124207\\
+\hline
+0.4555480 & Cue & Delay & 0.0100403\\
+\hline
+0.2657306 & Uncue & Prenap & 0.0105882\\
+\hline
+0.4991466 & Uncue & Delay & 0.0118761\\
+\hline
+\end{tabular}
 
 Figure 2: Results of 2x2 repeated measured ANOVA
 
@@ -182,6 +213,19 @@ Residuals & 37 & 2.6058138 & 0.0704274 & NA & NA\\
 From figure 1. \includegraphics{first_apa_files/figure-latex/fig1-1.pdf}
 
 \section{Discussion}\label{discussion}
+
+The interaction result by Hu et al. (2015) was successfully replicated.
+
+\subsection{Power Analysis}\label{power-analysis}
+
+The replicated interaction was due to a significant difference of the
+time factor in the uncued group. Since an F-value is equal to the square
+of a t-value, we should be able to simulate power of the analysis by
+simulating a t-test on the time factor difference. second citation
+Muller and Barton (1989)
+
+Figure 3.
+\includegraphics{first_apa_files/figure-latex/unnamed-chunk-5-1.pdf}
 
 \newpage
 
@@ -216,6 +260,10 @@ doi:\href{https://doi.org/10.1080/01621459.1989.10478802}{10.1080/01621459.1989.
 R Core Team. (2018). \emph{R: A language and environment for statistical
 computing}. Vienna, Austria: R Foundation for Statistical Computing.
 Retrieved from \url{https://www.R-project.org/}
+
+\hypertarget{ref-R-ggplot2}{}
+Wickham, H. (2016). \emph{Ggplot2: Elegant graphics for data analysis}.
+Springer-Verlag New York. Retrieved from \url{http://ggplot2.org}
 
 \hypertarget{ref-R-dplyr}{}
 Wickham, H., François, R., Henry, L., \& Müller, K. (2019). \emph{Dplyr:

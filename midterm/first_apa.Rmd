@@ -26,7 +26,7 @@ abstract: |
   
   <!-- https://tinyurl.com/ybremelq -->
   
-keywords          : "social biases, slow-wave sleep"
+keywords          : "unlearning, social biases, slow-wave sleep"
 wordcount         : "X"
 
 bibliography      : ["r-references.bib", "mybib.bib"]
@@ -54,10 +54,7 @@ set.seed(42)
 knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 ```
   
-  The experiment on unlearning social bias shows the relevance of sleep playing a role in the dissaption of the pre-existing implicit bias, @Hu1013. The rationale comes from auditory information reinforcing learning behavior during slow wave sleep, causing a targeted memory reactivation. As a result of the auditory cue, counterbias behavior in participants was expected to increase. In addition, the memory reactivation should result in a sustained reduction in social bias, in that the measured bias does not differ between prenap and delay. The implications of such an effect may be relevant for unlearning other unwanted habits. The original data was downloaded from [https://osf.io/b3k9a/](https://osf.io/b7x8q/)
-
-
-second citation @Keith1989
+  The experiment on unlearning social bias shows the relevance of sleep playing a role in the dissaption of a pre-existing implicit bias, @Hu1013. The rationale comes from auditory information reinforcing learning behavior during slow wave sleep, causing a targeted memory reactivation. As a result of the auditory cue, counterbias behavior in participants was expected to increase. In addition, the memory reactivation should result in a sustained reduction in social bias, in that the measured bias does not differ between prenap and delay. The implications of such an effect may be relevant for unlearning other unwanted habits. The original data was downloaded from [https://osf.io/b3k9a/](https://osf.io/b7x8q/)
 
 # Methods
 
@@ -68,13 +65,10 @@ second citation @Keith1989
   The details of the experiment can be found in @Hu1013.
 
 ## Procedure
-  The 38 participants experienced four conditions:
-
+  In the reproduced analysis, the 38 participants' bias score were measured under four conditions: No auditory cue before sleep, then one week later; and a reinforced cue before sleep, then one week later.
+  
 ## Data analysis
-We used `r cite_r("r-references.bib")` for all our analyses.
-
-
-# Results
+We used `r cite_r("r-references.bib")` for all our analyses. Two participants had to be excluded from the analyses and were labelled as 'NA' in the data sheet.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 #downloads csv data into R
@@ -109,13 +103,29 @@ clean_df <- all_data %>%
               filter(sub %in% bad_subjects == FALSE)
 
 aov_out = aov(subject_dv~cue_factor*time_factor+Error(sub/(cue_factor*time_factor)), clean_df)
-
+library(papaja)
+apa_stuff <- apa_print(summary(aov_out))
 
 ```
 
-Figure 2: Results of 2x2 repeated measured ANOVA
+# Results
+  The relevant IAT bias scores were grouped in R-studio for each participant in order to perform a 2x2 (cue/uncue vs prenap/delay) repeated measure ANOVA. The group means are displayed in Figure 1 followed by the ANOVA results in Figure 2. There was a main effect of Congruency, F (1, 49) = 342.45, MSE = 1684.39, p < 0.001. Mean reaction times were slower for incongruent (922 ms) than congruent groups (815 ms). There main effect of Posture was significant, F (1, 49) = 7.33, MSE = 4407.09, p =.009. Mean reaction times were slower for sitting (881 ms) than standing groups (855 ms). The two-way interaction between Congruency and Posture was significant, F (1, 49) = 8.96, MSE = 731.82, p < 0.004. The Stroop effect was 23 ms smaller in the standing than sitting conditions.
+
+Figure 1: Means
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
   library(xtable)
+  means = c(mean(cue_prenap), mean(cue_delay, na.rm = TRUE), 
+            mean(uncue_prenap), mean(uncue_delay, na.rm = TRUE))
+  SEM = c(sd(cue_prenap)/38, sd(cue_delay, na.rm=TRUE)/38, 
+          sd(uncue_prenap)/38, sd(uncue_delay, na.rm=TRUE)/38)
+  group_means = data.frame(GroupMean=means, Cue=c("Cue","Cue","Uncue","Uncue"), 
+                         Time=c("Prenap","Delay","Prenap","Delay"), SEM)
+  knitr::kable(xtable(group_means))
+```
+
+
+Figure 2: Results of 2x2 repeated measured ANOVA
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
   knitr::kable(xtable(summary(aov_out)))
 ```
 
@@ -127,6 +137,41 @@ hist(a)
 ```
 
 # Discussion
+  The interaction result by @Hu1013 was successfully replicated.
+  
+## Power Analysis
+  The replicated interaction was due to a significant difference of the time factor in the uncued group. Since an F-value is equal to the square of a t-value, we should be able to simulate power of the analysis by simulating a t-test on the time factor difference. second citation @Keith1989
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# function to run a simulated t-test
+sim_power <- function(x){
+  A <- rnorm(n=38,mean=0, sd=0.402)
+  B <- rnorm(n=38,mean=(0+x), sd=0.451)
+  return(t.test(A,B,var.equal=TRUE, paired = TRUE)$p.value)
+}
+
+# vector of effect sizes
+effect_sizes <- seq(.1,2,.1)
+# run simulation for each effect size 1000 times
+power <- sapply(effect_sizes, 
+                FUN = function(x) {
+                  sims <- replicate(1000,sim_power(x))
+                  sim_power <- length(sims[sims<.05])/length(sims)
+                  return(sim_power)})
+# combine into dataframe
+plot_df <- data.frame(effect_sizes,power)
+
+```
+
+Figure 3.
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# plot the power curve
+library(ggplot2)
+ggplot(plot_df, aes(x=effect_sizes,
+                    y=power))+
+  geom_point()+
+  geom_line()
+```
 
 
 \newpage
