@@ -66,12 +66,9 @@ knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 
 ## Procedure
   In the reproduced analysis, the 38 participants' bias score were measured under four conditions: No auditory cue before sleep, then one week later; and a reinforced cue before sleep, then one week later.
-  
-## Data analysis
-We used `r cite_r("r-references.bib")` for all our analyses. Two participants had to be excluded from the analyses and were labelled as 'NA' in the data sheet.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-#downloads csv data into R
+#downloads csv data into R.
 aaa3841_OpenData_withNA <- read.csv("~/GitHub(assignments)/midterm/midterm/aaa3841_OpenData_withNA.csv")
 
 #selecting data for analysis
@@ -105,11 +102,14 @@ clean_df <- all_data %>%
 aov_out = aov(subject_dv~cue_factor*time_factor+Error(sub/(cue_factor*time_factor)), clean_df)
 library(papaja)
 apa_stuff <- apa_print(summary(aov_out))
-
 ```
 
+## Data analysis
+We used `r cite_r("r-references.bib")` for all our analyses. Two participants had to be excluded from the analyses and were labelled as 'NA' in the data sheet.
+
 # Results
-  The relevant IAT bias scores were grouped in R-studio for each participant in order to perform a 2x2 (cue/uncue vs prenap/delay) repeated measure ANOVA. The group means are displayed in Figure 1 followed by the ANOVA results in Figure 2. There was a main effect of Congruency, F (1, 49) = 342.45, MSE = 1684.39, p < 0.001. Mean reaction times were slower for incongruent (922 ms) than congruent groups (815 ms). There main effect of Posture was significant, F (1, 49) = 7.33, MSE = 4407.09, p =.009. Mean reaction times were slower for sitting (881 ms) than standing groups (855 ms). The two-way interaction between Congruency and Posture was significant, F (1, 49) = 8.96, MSE = 731.82, p < 0.004. The Stroop effect was 23 ms smaller in the standing than sitting conditions.
+IAT bias scores were grouped in R-studio for each participant in order to perform a 2x2 (cue/uncue vs prenap/delay) repeated measure ANOVA. The group means are displayed in Figure 1 followed by the ANOVA results in Figure 2. There was a main effect of Time, `r apa_stuff$full_result$time_factor`. Mean IAT scores remained lower after training, between prenap testing (0.447) and testing one week later (0.334). There was not a main effect of cue factor after learning, `r apa_stuff$full_result$cue_factor`. The two-way interaction between Time and Cue after training was significant, `r apa_stuff$full_result$cue_factor_time_factor`. The difference in prenap and delay scores was significant only when the cue was not initiated.
+
 
 Figure 1: Means
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
