@@ -64,8 +64,8 @@ ggplot(group_means, aes(x=cue_f,
 
 # function to run a simulated t-test
 sim_power <- function(x){
-  A <- rnorm(n=38,mean=0, sd=0.402)
-  B <- rnorm(n=38,mean=(0+x), sd=0.451)
+  A <- rnorm(n=38,mean=0, sd=1)
+  B <- rnorm(n=38,mean=(0+x), sd=1)
   return(t.test(A,B,var.equal=TRUE, paired = TRUE)$p.value)
 }
 

@@ -109,7 +109,7 @@ by reinforcing a counterbias behavior during slow-wave/REM sleep - the
 optimal time frame to consolidate new memories. The reproduced analysis
 pertains to the interaction of cued and uncued reduction bias before
 sleep (prenap), then, one week later (delayed). A power analysis shows
-that the original effect size may only be observed approximately half
+that the original effect size may only be observed approximately 14\% of
 the time on average.
 
 
@@ -153,9 +153,10 @@ We used R (Version 3.5.0; R Core Team, 2018) and the R-packages
 \emph{bindrcpp} (Müller, 2018), \emph{dplyr} (Version 0.8.0.1; Wickham,
 François, Henry, \& Müller, 2019), \emph{ggplot2} (Version 3.1.0;
 Wickham, 2016), \emph{papaja} (Version 0.1.0.9842; Aust \& Barth, 2018),
-and \emph{xtable} (Version 1.8.3; Dahl, Scott, Roosen, Magnusson, \&
-Swinton, 2018) for all our analyses. Two participants had to be excluded
-from the analyses and were labelled as \enquote{NA} in the data sheet.
+\emph{sjstats} (Version 0.17.4; Lüdecke, 2019), and \emph{xtable}
+(Version 1.8.3; Dahl, Scott, Roosen, Magnusson, \& Swinton, 2018) for
+all our analyses. Two participants had to be excluded from the analyses
+and were labelled as \enquote{NA} in the data sheet.
 
 \section{Results}\label{results}
 
@@ -170,9 +171,11 @@ factor after learning, \(F(1, 37) = 0.34\), \(\mathit{MSE} = 0.28\),
 \(p = .566\), \(\hat{\eta}^2_G = .003\). The two-way interaction between
 Time and Cue after training was significant, \(F(1, 37) = 4.67\),
 \(\mathit{MSE} = 0.07\), \(p = .037\), \(\hat{\eta}^2_G = .012\). The
-Stroop effect was 23 ms smaller in the standing than sitting conditions.
+difference in prenap and delay scores was significant only when the cue
+was not initiated, indicating that memory reactivation sustained after
+counterbias training.
 
-Figure 1: Means
+Figure 1: Means of time and cue factor
 
 \begin{tabular}{r|l|l|r}
 \hline
@@ -210,8 +213,6 @@ Residuals & 37 & 2.6058138 & 0.0704274 & NA & NA\\
 \hline
 \end{tabular}
 
-From figure 1. \includegraphics{first_apa_files/figure-latex/fig1-1.pdf}
-
 \section{Discussion}\label{discussion}
 
 The interaction result by Hu et al. (2015) was successfully replicated.
@@ -220,12 +221,16 @@ The interaction result by Hu et al. (2015) was successfully replicated.
 
 The replicated interaction was due to a significant difference of the
 time factor in the uncued group. Since an F-value is equal to the square
-of a t-value, we should be able to simulate power of the analysis by
-simulating a t-test on the time factor difference. second citation
-Muller and Barton (1989)
+of a t-value, we can simulate power by simulating a t-test on the
+difference of time factor. The mean score difference between prenap and
+delay is (0.143) for cue and uncue. We applied this difference to our
+simulation assuming equal variance in our two samples (n = 38), and
+calculated an estimated power of 0.136, meaning the observed effect size
+may only occur 13.6\% of the time.
 
-Figure 3.
-\includegraphics{first_apa_files/figure-latex/unnamed-chunk-5-1.pdf}
+Figure 3.Power analysis on the interaction of time/cue via t-test on
+time factor
+\includegraphics{first_apa_files/figure-latex/unnamed-chunk-3-1.pdf}
 
 \newpage
 
@@ -250,11 +255,10 @@ Hu, X., Antony, J. W., Creery, J. D., Vargas, I. M., Bodenhausen, G. V.,
 \emph{348}(6238), 1013--1015.
 doi:\href{https://doi.org/10.1126/science.aaa3841}{10.1126/science.aaa3841}
 
-\hypertarget{ref-Keith1989}{}
-Muller, K. E., \& Barton, C. N. (1989). Approximate power for
-repeated-measures anova lacking sphericity. \emph{Journal of the
-American Statistical Association}, \emph{84}(406), 549--555.
-doi:\href{https://doi.org/10.1080/01621459.1989.10478802}{10.1080/01621459.1989.10478802}
+\hypertarget{ref-R-sjstats}{}
+Lüdecke, D. (2019). \emph{Sjstats: Statistical functions for regression
+models (version 0.17.4)}.
+doi:\href{https://doi.org/10.5281/zenodo.1284472}{10.5281/zenodo.1284472}
 
 \hypertarget{ref-R-bindrcpp}{}
 Müller, K. (2018). \emph{Bindrcpp: An 'rcpp' interface to active

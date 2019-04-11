@@ -21,7 +21,7 @@ authornote: |
   Enter author note here.
 
 abstract: |
-  There is evidence by @Hu1013 on the unlearning of social bias by reinforcing a counterbias behavior during slow-wave/REM sleep - the optimal time frame to consolidate new memories. The reproduced analysis pertains to the interaction of cued and uncued reduction bias before sleep (prenap), then, one week later (delayed). A power analysis shows that the original effect size may only be observed approximately half the time on average.
+  There is evidence by @Hu1013 on the unlearning of social bias by reinforcing a counterbias behavior during slow-wave/REM sleep - the optimal time frame to consolidate new memories. The reproduced analysis pertains to the interaction of cued and uncued reduction bias before sleep (prenap), then, one week later (delayed). A power analysis shows that the original effect size may only be observed approximately 14% of the time on average.
   
   
   <!-- https://tinyurl.com/ybremelq -->
@@ -59,13 +59,13 @@ knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 # Methods
 
 ## Participants
-  As stated in experiment, there were 40 participants recruited but only 38 were present for all groups.
+As stated in experiment, there were 40 participants recruited but only 38 were present for all groups.
 
 ## Material
-  The details of the experiment can be found in @Hu1013.
+The details of the experiment can be found in @Hu1013.
 
 ## Procedure
-  In the reproduced analysis, the 38 participants' bias score were measured under four conditions: No auditory cue before sleep, then one week later; and a reinforced cue before sleep, then one week later.
+In the reproduced analysis, the 38 participants' bias score were measured under four conditions: No auditory cue before sleep, then one week later; and a reinforced cue before sleep, then one week later.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 #downloads csv data into R.
@@ -102,17 +102,19 @@ clean_df <- all_data %>%
 aov_out = aov(subject_dv~cue_factor*time_factor+Error(sub/(cue_factor*time_factor)), clean_df)
 library(papaja)
 apa_stuff <- apa_print(summary(aov_out))
+#library(sjstats)
+#eta_sq(aov_out, partial = TRUE)
 ```
 
 ## Data analysis
 We used `r cite_r("r-references.bib")` for all our analyses. Two participants had to be excluded from the analyses and were labelled as 'NA' in the data sheet.
 
 # Results
-IAT bias scores were grouped in R-studio for each participant in order to perform a 2x2 (cue/uncue vs prenap/delay) repeated measure ANOVA. The group means are displayed in Figure 1 followed by the ANOVA results in Figure 2. There was a main effect of Time, `r apa_stuff$full_result$time_factor`. Mean IAT scores remained lower after training, between prenap testing (0.447) and testing one week later (0.334). There was not a main effect of cue factor after learning, `r apa_stuff$full_result$cue_factor`. The two-way interaction between Time and Cue after training was significant, `r apa_stuff$full_result$cue_factor_time_factor`. The difference in prenap and delay scores was significant only when the cue was not initiated.
+IAT bias scores were grouped in R-studio for each participant in order to perform a 2x2 (cue/uncue vs prenap/delay) repeated measure ANOVA. The group means are displayed in Figure 1 followed by the ANOVA results in Figure 2. There was a main effect of Time, `r apa_stuff$full_result$time_factor`. Mean IAT scores remained lower after training, between prenap testing (0.447) and testing one week later (0.334). There was not a main effect of cue factor after learning, `r apa_stuff$full_result$cue_factor`. The two-way interaction between Time and Cue after training was significant, `r apa_stuff$full_result$cue_factor_time_factor`. The difference in prenap and delay scores was significant only when the cue was not initiated, indicating that memory reactivation sustained after counterbias training.
 
 
-Figure 1: Means
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+Figure 1: Means of time and cue factor
+```{r, fig1, echo=FALSE, warning=FALSE, message=FALSE}
   library(xtable)
   means = c(mean(cue_prenap), mean(cue_delay, na.rm = TRUE), 
             mean(uncue_prenap), mean(uncue_delay, na.rm = TRUE))
@@ -125,28 +127,22 @@ Figure 1: Means
 
 
 Figure 2: Results of 2x2 repeated measured ANOVA
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, fig2, echo=FALSE, warning=FALSE, message=FALSE}
   knitr::kable(xtable(summary(aov_out)))
 ```
 
-
-From figure 1.
-```{r fig1, fig.cap="figure shows a histogram", fig.width=2, fig.height=3}
-a <- rnorm(100,0,1)
-hist(a)
-```
-
 # Discussion
-  The interaction result by @Hu1013 was successfully replicated.
-  
+The interaction result by @Hu1013 was successfully replicated.
+
 ## Power Analysis
-  The replicated interaction was due to a significant difference of the time factor in the uncued group. Since an F-value is equal to the square of a t-value, we should be able to simulate power of the analysis by simulating a t-test on the time factor difference. second citation @Keith1989
+The replicated interaction was due to a significant difference of the time factor in the uncued group. Since an F-value is equal to the square of a t-value, we can simulate power by simulating a t-test on the difference of time factor. The mean score difference between prenap and delay is (0.143) for cue and uncue. We applied this difference to our simulation assuming equal variance in our two samples (n = 38), and calculated an estimated power of 0.136, meaning the observed effect size may only occur 13.6% of the time.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # function to run a simulated t-test
+x = 0.143
 sim_power <- function(x){
-  A <- rnorm(n=38,mean=0, sd=0.402)
-  B <- rnorm(n=38,mean=(0+x), sd=0.451)
+  A <- rnorm(n=38,mean=0, sd=1)
+  B <- rnorm(n=38,mean=(0+x), sd=1)
   return(t.test(A,B,var.equal=TRUE, paired = TRUE)$p.value)
 }
 
@@ -163,7 +159,7 @@ plot_df <- data.frame(effect_sizes,power)
 
 ```
 
-Figure 3.
+Figure 3.Power analysis on the interaction of time/cue via t-test on time factor
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 # plot the power curve
 library(ggplot2)
